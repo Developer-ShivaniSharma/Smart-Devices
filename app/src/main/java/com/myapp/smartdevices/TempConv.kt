@@ -5,12 +5,14 @@ enum class TempScale {
 }
 
 fun main() {
+    val (current, initialScale, targetScale) = Triple(-200.0, TempScale.K, TempScale.C)
+    val resultTemp = convert(current, initialScale, targetScale)
+    val formattedTemp = String.format("%.2f", resultTemp)
+    println("Temp: $current$initialScale -> $formattedTemp$targetScale")
 
 }
 
 fun convert(current: Double, currentScale: TempScale, finalScale: TempScale): Double {
-
-
     return when (currentScale) {
         TempScale.C -> when (finalScale) {
             // celsius to celsius
@@ -21,15 +23,21 @@ fun convert(current: Double, currentScale: TempScale, finalScale: TempScale): Do
             TempScale.K -> fahrenheitToKelvin(celsiusToFahrenheit(current))
         }
 
-        TempScale.F -> when(finalScale) {
-            TempScale.C -> TOD
+        TempScale.F -> when (finalScale) {
+            TempScale.C -> kelvinToCelsius(fahrenheitToKelvin(current))
             TempScale.F -> current
-            TempScale.K -> TODO()
+            TempScale.K -> fahrenheitToKelvin(celsiusToFahrenheit(current))
         }
-        TempScale.K -> TODO()
+
+        TempScale.K -> when (finalScale) {
+            TempScale.C -> kelvinToCelsius(current)
+            TempScale.F -> celsiusToFahrenheit(kelvinToCelsius(current))
+            TempScale.K -> current
+        }
     }
 
 }
+
 
 // Celsius to Fahrenheit: ° F = 9/5 (° C) + 32
 // Kelvin to Celsius: ° C = K - 273.15
