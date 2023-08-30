@@ -40,23 +40,35 @@ class FoldablePhone(var isFolded: Boolean) : Phone(isPhoneScreenOn = !isFolded),
             super.switchOn()
         }
     }
+     //We override the fold and unfold feature from interface Foldable.
 
+    //the fold() function called when the phone is folded.
+    //it will check the state of the phone ,if the phone isFolded then value should be true.
+    //then it will run the switchOff fun and turnOff the screen light.
     override fun fold() {
         isFolded = true
         switchOff()
     }
-
+    //the unfold() function called when the phone is not folded.
+    //it will check the state of the phone, if the phone is not folded then the value should be false.
+    //then it will run the switchOn fun and turnOn the screen light.
     override fun unfold() {
         isFolded = false
         switchOn()
     }
 }
 
+/**
+ * We have use the interface [Foldable] so that our subclass [FoldablePhone]can use the features defined in the interface.
+ */
 interface Foldable {
     fun fold()
     fun unfold()
 }
 
+/**
+ * in the main fun we create the object reference of [FoldablePhone] and call the functions.
+ */
 fun main() {
     val foldedphone = FoldablePhone(true)
     foldedphone.checkPhoneLight() // off
