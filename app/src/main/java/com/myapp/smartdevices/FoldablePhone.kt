@@ -41,7 +41,6 @@ class FoldablePhone(var isFolded: Boolean) : Phone(isPhoneScreenOn = !isFolded),
         }
     }
      //We override the fold and unfold feature from interface Foldable.
-
     //the fold() function called when the phone is folded.
     //it will check the state of the phone ,if the phone isFolded then value should be true.
     //then it will run the switchOff fun and turnOff the screen light.
